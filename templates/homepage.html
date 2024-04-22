@@ -1,0 +1,44 @@
+
+
+{% extends "layout.html" %}
+
+{% block title %}
+    Log In
+{% endblock %}
+
+{% block main %}
+{% if stocks %}
+    <table class="table table-striped">
+        <!-- table headers -->
+    <thead>
+      <tr>
+        <th class="text-start">Symbol</th>
+        <th class="text-end">Shares</th>
+        <th class="text-end">Price</th>
+        <th class="text-end">Total</th>
+      </tr>
+    </thead>
+        {% for stock in stocks %}
+            <tr>
+                <td class="text-start">{{ stock.symbol }}</td>
+                <td class="text-end">{{ stock.shares }}</td>
+                <td class="text-end">{{ stock.price | usd }}</td>
+                <td class="text-end">{{ stock.total | usd }}</td>
+                <!-- other stock properties The homepages werent too crazy difficult as the layout was already made-->
+            </tr>
+        {% endfor %}
+        <tfoot>
+            <tr>
+                <td class="border-0 fw-bold text-end" colspan="3">CASH</td>
+                <td class="border-0 text-end">{{ cash_balance  | usd }}</td>
+            </tr>
+            <tr>
+                <td class="border-0 fw-bold text-end" colspan="3">TOTAL</td>
+                <td class="border-0 w-bold text-end">{{ total | usd }}</td>
+            </tr>
+        </tfoot>
+    </table>
+{% else %}
+    <p>No stocks to display.</p>
+{% endif %}
+{% endblock %}

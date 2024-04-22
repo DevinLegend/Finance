@@ -1,0 +1,34 @@
+
+
+{% extends "layout.html" %}
+
+{% block title %}
+    Log In
+{% endblock %}
+
+{% block main %}
+{% if stocks %}
+    <table class="table table-striped">
+        <!-- table headers -->
+    <thead>
+      <tr>
+        <th class="text-start">Symbol</th>
+        <th class="text-end">Shares</th>
+        <th class="text-end">Price</th>
+        <th class="text-end">Transacted</th>
+      </tr>
+    </thead>
+        {% for stock in stocks %}
+            <tr>
+                <td class="text-start">{{ stock.stock_name }}</td>
+                <td class="text-end">{{ stock.type }} {{ stock.quantity }}</td>
+                <td class="text-end">{{ stock.price | usd }}</td>
+                <td class="text-end">{{ stock.timestamp }}</td>
+                <!-- other stock properties  The duck helped a bit with the jinja formatting of stock.type and stock.quantity also the USD-->
+            </tr>
+        {% endfor %}
+    </table>
+{% else %}
+    <p>No transactions to display.</p>
+{% endif %}
+{% endblock %}
